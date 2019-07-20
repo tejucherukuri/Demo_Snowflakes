@@ -14,7 +14,7 @@ var snowflake = require('snowflake-sdk');
 var connection = snowflake.createConnection( {
   account: 'kh27117',
   username: 'intraedge',
-  password: '!12345Qwerty',
+  password: '********',
   region: 'us-east-1',
   database: 'STUDENT_PROFILE'
   }
@@ -24,8 +24,6 @@ var connection = snowflake.createConnection( {
 connection.connect( 
   function(err, conn) {
       if (err) {
-          console.log("wat is the err here :",err)
-          // console.log("wat is the conn here:",conn)
           console.error('Unable to connect: ' + err.message);
           } 
       else {
@@ -38,13 +36,11 @@ connection.connect(
  
   connection.execute({
     sqlText: 'select * from USER',
-    // streamResult: true,
-    // fetchAsString: ['String'], // prevent rows from being returned inline in the complete callback
     complete: function(err, stmt, rows) {
       if (err) {
         console.error('Failed to execute statement due to the following error: ' + err.message);
       } else {
-        console.log('c1: ' + rows.length); // c1: 1.123456789123456789123456789
+        console.log('Number of rows in the User table ' + rows.length); // c1: 1.123456789123456789123456789
       }
     }
   })
